@@ -26,6 +26,8 @@ services:
       SPRING_DATASOURCE_PASSWORD: admin
     ports:
       - "8080:8080"
+    volumes:
+      - /mnt/c/Users/Corin/Desktop/mediavault-test-media:/media/movies:rw
 
 volumes:
   pgdata:
