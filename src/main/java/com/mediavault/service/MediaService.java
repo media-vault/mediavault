@@ -1,11 +1,13 @@
 package com.mediavault.service;
 
 import com.mediavault.entity.Media;
+import com.mediavault.entity.MediaType;
 import com.mediavault.repository.MediaRepository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
-import jakarta.annotation.PostConstruct;
+
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MediaService {
@@ -14,29 +16,49 @@ public class MediaService {
     public MediaService(MediaRepository mediaRepository) {
         this.mediaRepository = mediaRepository;
     }
-
+    
+    // Retrieve all media
     public List<Media> getAllMedia() {
         return mediaRepository.findAll();
     }
 
+    // Retrieve media by ID
     public Media getMediaById(Long id) {
         return mediaRepository.findById(id).orElse(null);
     }
 
-    public Media saveMedia(Media media) {
+    // Search for media by title
+    public List<Media> searchMedia(String title) {
+        return mediaRepository.findByTitleContainingIgnoreCase(title);
+    }
+
+    // Filter by MediaType
+    public List<Media> getMediaByType(MediaType mediaType) {
+        return mediaRepository.findByMediaType(mediaType);
+    }
+
+    // Add new media
+    public Media addMedia(Media media) {
         return mediaRepository.save(media);
     }
-    
-    @PostConstruct
-    @Transactional
-    public void initDatabase() {
-        if (mediaRepository.count() == 0) {
-            mediaRepository.saveAll(List.of(
-                new Media(null, "Inception", "/media/movies/inception.mp4", "https://image.tmbd.org/t/p/w500/xyz.jpg", 2010),
-                new Media(null, "The Matrix", "/media/movies/matrix.mp4", "https://image.tmbd.org/t/p/w500/abc.jpg", 1999),
-                new Media(null, "Interstellar", "/media/movies/interstellar.mp4", "https://image.tmbd.org/t/p/w500/pqr.jpg", 2014)
-            ));
-            System.out.println("Bootstrapped test data.");
-        }
+
+    // Update exisiting media
+    public Optional<Media> updateMedia(Long id, Media updatedMedia) {
+        return mediaRepository.findById(id).map(existingMedia -> {
+            existingMedia.setTitle(updatedMedia.getTitle());
+            existingMedia.setDescription(updatedMedia.getDescription());
+            existingMedia.setFilePath(updatedMedia.getFilePath());
+            existingMedia.setCoverArtUrl(updatedMedia.getCoverArtUrl());
+            existingMedia.setGenre(updatedMedia.getGenre());
+            existingMedia.setReleaseYear(updatedMedia.getReleaseYear());
+            existingMedia.setLanguage(updatedMedia.getLanguage());
+            existingMedia.setMediaType(updatedMedia.getMediaType());
+            return mediaRepository.save(existingMedia);
+        });
+    }
+
+    // Delete media by ID
+    public void deleteMedia(Long id) {
+        mediaRepository.deleteById(id);
     }
 }
