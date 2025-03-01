@@ -10,7 +10,7 @@ import java.util.Date;
 
 @Component
 public class JwtUtil {
-    private static final String SECRET_KEY = "ThisIsASecretKeyForJwtGenerationReplaceMeWithARealSecretKey";
+    private static final String SECRET_KEY = "22b335bbea3b6274e2d7aba728c3dd2def750a890d27b5c6f7f1f95e8d2ad657a58cd605298e6f46090f5e4426f83ccfd907ddabb29d776d5572ea0d081debd7";
     private static final long EXPIRATION_TIME = 86400000; // 1 day
 
     private final Key key = Keys.hmacShaKeyFor(Decoders.BASE64.decode(SECRET_KEY));
