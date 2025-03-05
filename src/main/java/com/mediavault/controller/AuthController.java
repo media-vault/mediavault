@@ -17,14 +17,28 @@ public class AuthController {
     }
 
     @PostMapping("/register") 
-    public ResponseEntity<Map<String, String>> register(@RequestBody Map<String, String> request) {
-        String token = authService.registerUser(request.get("username"), request.get("password"), Role.valueOf(request.get("role").toUpperCase()));
-        return ResponseEntity.ok(Map.of("token", token));
+    public ResponseEntity<?> register(@RequestBody Map<String, String> request) {
+        String username = request.get("username");
+        String password = request.get("password");
+
+        String message = authService.register(username, password);
+
+        return ResponseEntity.ok(Map.of("message", message));
     }
 
     @PostMapping("/login") 
-    public ResponseEntity<Map<String, String>> login(@RequestBody Map<String, String> request) {
-        String token = authService.loginUser(request.get("username"), request.get("password"));
-        return ResponseEntity.ok(Map.of("token", token));
+    public ResponseEntity<?> login(@RequestBody Map<String, String> request) {
+        String username = request.get("username");
+        String password = request.get("password");
+
+        String accessToken = authService.login(username, password);
+
+        return ResponseEntity.ok(Map.of("accessToken", accessToken));
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity<?> logout(@RequestHeader("X-MediaVault-Token") String token) {
+        authService.logout(token);
+        return ResponseEntity.ok(Map.of("message", "Logged out successfully"));
     }
 }

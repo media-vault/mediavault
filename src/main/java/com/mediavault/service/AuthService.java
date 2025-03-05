@@ -1,46 +1,71 @@
 package com.mediavault.service;
 
-import com.mediavault.entity.Role;
 import com.mediavault.entity.User;
+import com.mediavault.entity.Session;
+import com.mediavault.entity.Role;
 import com.mediavault.repository.UserRepository;
-import com.mediavault.security.JwtUtil;
+import com.mediavault.repository.SessionRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
 import java.util.Optional;
 
 @Service
 public class AuthService {
     private final UserRepository userRepository;
+    private final SessionRepository sessionRepository;
     private final PasswordEncoder passwordEncoder;
-    private final JwtUtil jwtUtil;
 
-    public AuthService(UserRepository userRepository, PasswordEncoder passwordEncoder, JwtUtil jwtUtil) {
+    public AuthService(UserRepository userRepository, SessionRepository sessionRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.sessionRepository = sessionRepository;
         this.passwordEncoder = passwordEncoder;
-        this.jwtUtil = jwtUtil;
     }
 
-    public String registerUser(String username, String password, Role role) {
+    public String register(String username, String password) {
        if (userRepository.findByUsername(username).isPresent()) {
             throw new RuntimeException("User already exists");
        }
-        
-        User user = new User();
-        user.setUsername(username);
-        user.setPassword(passwordEncoder.encode(password));
-        user.setRole(role);
-        userRepository.save(user);
 
-        return jwtUtil.generateToken(user.getUsername(), user.getRole().name());
+       String hashedPassword = passwordEncoder.encode(password);
+
+       User newUser = new User();
+       newUser.setUsername(username);
+       newUser.setPassword(hashedPassword);
+       newUser.setRole(Role.USER);
+
+       userRepository.save(newUser);
+
+       return "Success creating User";
     }
 
-    public String loginUser(String username, String password) {
-        Optional<User> user = userRepository.findByUsername(username);
-        if (user.isEmpty() || !passwordEncoder.matches(password, user.get().getPassword())) {
+    public String login(String username, String password) {
+        Optional<User> userOptional = userRepository.findByUsername(username);
+
+        if (userOptional.isEmpty()) {
             throw new RuntimeException("Invalid credentials");
         }
 
-        return jwtUtil.generateToken(user.get().getUsername(), user.get().getRole().name());
+        User user = userOptional.get();
+
+        if (!passwordEncoder.matches(password, user.getPassword())) {
+            throw new RuntimeException("Invalid password");
+        }
+
+        sessionRepository.findByUserId(user.getId()).ifPresent(sessionRepository::delete);
+
+        String apiKey = UUID.randomUUID().toString();
+
+        Session session = new Session();
+        session.setUser(user);
+        session.setAccessToken(apiKey);
+        sessionRepository.save(session);
+
+        return apiKey;
+    }
+
+    public void logout(String accessToken) {
+        sessionRepository.deleteByAccessToken(accessToken);
     }
 }
