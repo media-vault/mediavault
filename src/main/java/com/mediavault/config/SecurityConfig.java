@@ -34,7 +34,8 @@ public class SecurityConfig {
             .authorizeHttpRequests(auth -> auth
                     .requestMatchers("/api/auth/**").permitAll()
                     .requestMatchers("/api/stream/**").permitAll()
-                    .anyRequest().authenticated()
+                    .requestMatchers("/", "/index.html", "/register", "/login", "/media/**", "/stream/**").permitAll()
+                    .anyRequest().permitAll()
             )
             .addFilterBefore(apiKeyAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
