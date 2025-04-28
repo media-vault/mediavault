@@ -27,7 +27,7 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - /mnt/c/Users/Corin/Desktop/mediavault-test-media:/media/movies:rw
+      - ${APP_DATA_PATH}:/media/movies:rw
 
 volumes:
   pgdata:
