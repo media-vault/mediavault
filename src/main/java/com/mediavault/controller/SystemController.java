@@ -1,19 +1,24 @@
 package com.mediavault.controller;
 
+import com.mediavault.dto.SystemInfoDTO;
+import com.mediavault.service.SystemInfoService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/system")
 public class SystemController {
 
-    public SystemController() {
+    private final SystemInfoService systemInfoService;
+
+    @Autowired
+    public SystemController(SystemInfoService systemInfoService) {
+        this.systemInfoService = systemInfoService;
     }
 
-    // Retrieve all system info
     @GetMapping("/info")
-    public ResponseEntity<List<>>getSystemInfo{
+    public ResponseEntity<SystemInfoDTO>getSystemInfo() {
+        return ResonseEntity.ok(systemInfoService.getSystemInfo());
     }
 }
