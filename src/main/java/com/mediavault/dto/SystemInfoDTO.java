@@ -73,11 +73,11 @@ public class SystemInfoDTO {
         this.architecture = architecture;
     }
 
-    public ZonedDataTime getLocalTime() {
+    public ZonedDateTime getLocalTime() {
         return localTime;
     }
 
-    public void setLocalTime(ZonedDataTime localTime) {
+    public void setLocalTime(ZonedDateTime localTime) {
         this.localTime = localTime;
     }
 

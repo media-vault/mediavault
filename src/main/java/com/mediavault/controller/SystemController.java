@@ -19,6 +19,6 @@ public class SystemController {
 
     @GetMapping("/info")
     public ResponseEntity<SystemInfoDTO>getSystemInfo() {
-        return ResonseEntity.ok(systemInfoService.getSystemInfo());
+        return ResponseEntity.ok(systemInfoService.getSystemInfo());
     }
 }
