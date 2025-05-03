@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import jakarta.persistence.*;
-import lombok.*;
 
 @JsonTypeInfo(
     use = JsonTypeInfo.Id.NAME,
@@ -19,10 +18,6 @@ import lombok.*;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "media_type", discriminatorType = DiscriminatorType.STRING)
 @Table(name = "media")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 public abstract class Media {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,4 +34,97 @@ public abstract class Media {
     @Enumerated(EnumType.STRING)
     @Column(name = "type_of_media")
     private MediaType mediaType;
+
+    public Media() {}
+
+    public Media(Long id, String title, String description, String filePath, String coverArtUrl, String genre, int releaseYear, String language, MediaType mediaType) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.filePath = filePath;
+        this.coverArtUrl = coverArtUrl;
+        this.genre = genre;
+        this.releaseYear = releaseYear;
+        this.language = language;
+        this.mediaType = mediaType;
+    }
+    
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getFilePath() {
+        return filePath;
+    }
+
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
+    }
+
+    public String getCoverArtUrl() {
+        return coverArtUrl;
+    }
+
+    public void setCoverArtUrl(String coverArtUrl) {
+        this.coverArtUrl = coverArtUrl;
+    }
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
+
+    public int getReleaseYear() {
+        return releaseYear;
+    }
+
+    public void setReleaseYear(int releaseYear) {
+        this.releaseYear = releaseYear;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
+    }
+
+    public MediaType getMediaType() {
+        return mediaType;
+    }
+
+    public void setMediaType(MediaType mediaType) {
+        this.mediaType = mediaType;
+    }
+
 }
+
+
+
+
+
+

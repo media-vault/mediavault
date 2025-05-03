@@ -1,16 +1,11 @@
 package com.mediavault.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "sessions")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 public class Session {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,4 +18,45 @@ public class Session {
     private String accessToken;
 
     private LocalDateTime createdAt = LocalDateTime.now();
+
+    public Session() {}
+
+    public Session(Long id, User user, String accessToken, LocalDateTime createdAt) {
+        this.id = id;
+        this.user = user;
+        this.accessToken = accessToken;
+        this.createdAt = createdAt;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+    
+    public String getAccessToken() {
+        return accessToken;
+    }
+
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
 }
