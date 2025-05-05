@@ -10,7 +10,7 @@ public class UserProfileDTO {
 
     public UserProfileDTO() {}
 
-    public UserPrfileDTO(Long id, String displayName, String avatarUrl, String bio, String language, String country) {
+    public UserProfileDTO (Long id, String displayName, String avatarUrl, String bio, String language, String country) {
         this.id = id;
         this.displayName = displayName;
         this.avatarUrl = avatarUrl;
@@ -25,14 +25,6 @@ public class UserProfileDTO {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     public String getDisplayName() {
