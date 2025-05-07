@@ -2,8 +2,9 @@ package com.mediavault.entity;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-
 import jakarta.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @JsonTypeInfo(
     use = JsonTypeInfo.Id.NAME,
@@ -24,12 +25,10 @@ public abstract class Media {
     private Long id;
 
     private String title;
-    private String description;
     private String filePath;
-    private String coverArtUrl;
-    private String genre;
-    private int releaseYear;
-    private String language;
+    private LocalDateTime createdAt = LocalDateTime.now();
+    private LocalDateTime updatedAt = LocalDateTime.now();
+    private boolean isAvailable;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "type_of_media")
@@ -37,15 +36,13 @@ public abstract class Media {
 
     public Media() {}
 
-    public Media(Long id, String title, String description, String filePath, String coverArtUrl, String genre, int releaseYear, String language, MediaType mediaType) {
+    public Media(Long id, String title, String filePath, LocalDate releaseDate, LocalDateTime createdAt, LocalDateTime updatedAt, boolean isAvailable, MediaType mediaType) {
         this.id = id;
         this.title = title;
-        this.description = description;
         this.filePath = filePath;
-        this.coverArtUrl = coverArtUrl;
-        this.genre = genre;
-        this.releaseYear = releaseYear;
-        this.language = language;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.isAvailable = isAvailable;
         this.mediaType = mediaType;
     }
     
@@ -65,14 +62,6 @@ public abstract class Media {
         this.title = title;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public String getFilePath() {
         return filePath;
     }
@@ -81,36 +70,29 @@ public abstract class Media {
         this.filePath = filePath;
     }
 
-    public String getCoverArtUrl() {
-        return coverArtUrl;
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCoverArtUrl(String coverArtUrl) {
-        this.coverArtUrl = coverArtUrl;
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 
-    public String getGenre() {
-        return genre;
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
     }
 
-    public void setGenre(String genre) {
-        this.genre = genre;
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
-    public int getReleaseYear() {
-        return releaseYear;
+    public boolean getIsAvailable() {
+        return isAvailable;
     }
 
-    public void setReleaseYear(int releaseYear) {
-        this.releaseYear = releaseYear;
-    }
-
-    public String getLanguage() {
-        return language;
-    }
-
-    public void setLanguage(String language) {
-        this.language = language;
+    public void setIsAvailable(boolean isAvailable) {
+        this.isAvailable = isAvailable;
     }
 
     public MediaType getMediaType() {
@@ -120,11 +102,4 @@ public abstract class Media {
     public void setMediaType(MediaType mediaType) {
         this.mediaType = mediaType;
     }
-
 }
-
-
-
-
-
-

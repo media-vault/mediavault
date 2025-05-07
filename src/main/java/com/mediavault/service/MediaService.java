@@ -46,12 +46,7 @@ public class MediaService {
     public Optional<Media> updateMedia(Long id, Media updatedMedia) {
         return mediaRepository.findById(id).map(existingMedia -> {
             existingMedia.setTitle(updatedMedia.getTitle());
-            existingMedia.setDescription(updatedMedia.getDescription());
             existingMedia.setFilePath(updatedMedia.getFilePath());
-            existingMedia.setCoverArtUrl(updatedMedia.getCoverArtUrl());
-            existingMedia.setGenre(updatedMedia.getGenre());
-            existingMedia.setReleaseYear(updatedMedia.getReleaseYear());
-            existingMedia.setLanguage(updatedMedia.getLanguage());
             existingMedia.setMediaType(updatedMedia.getMediaType());
             return mediaRepository.save(existingMedia);
         });
