@@ -31,9 +31,9 @@ public abstract class Media {
     private int releaseYear;
     private String language;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "type_of_media")
-    private MediaType mediaType;
+	@Enumerated(EnumType.STRING)
+	@Column(name = "type_of_media")
+	private MediaType mediaType;
 
     public Media() {}
 
