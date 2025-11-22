@@ -10,9 +10,6 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - media_data:/media
-      - db_data:/app/data
+      - ./media_data:/media
+      - ./db_data:/app/data
 
-volumes:
-  media_data:
-  db_data:
