@@ -16,7 +16,7 @@ import java.util.List;
 @RequestMapping("/api/stream")
 public class StreamingController {
         
-        private static final String MOVIE_DIRECTORY = "/media/movies";
+        private static final String MOVIE_DIRECTORY = "/media";
     
         @GetMapping("/{filename}")
         public ResponseEntity<Resource> streamMedia(@PathVariable String filename, @RequestHeader HttpHeaders headers) {
