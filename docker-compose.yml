@@ -1,33 +1,18 @@
 version: '3.8'
 
 services:
-  db:
-    image: postgres:15
-    container_name: mediavault-db
-    restart: always
-    environment:
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: admin
-      POSTGRES_DB: mediavault
-    ports:
-      - "5432:5432"
-    volumes:
-      - pgdata:/var/lib/postgresql/data
-
-  app:
+  mediavault:
     build: .
-    container_name: mediavault-app
+    container_name: mediavault
     env_file:
       - .env
     restart: always
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/mediavault
-      SPRING_DATASOURCE_USERNAME: admin
-      SPRING_DATASOURCE_PASSWORD: admin
     ports:
       - "8080:8080"
     volumes:
-      - ${APP_DATA_PATH}:/media/movies:rw
+      - media_data:/media
+      - db_data:/app/data
 
 volumes:
-  pgdata:
+  media_data:
+  db_data:
