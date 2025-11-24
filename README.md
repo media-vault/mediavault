@@ -38,3 +38,15 @@ Check out our <a href="">feature request hub</a>.<br/>
 3. Access the MediaVault web interface
 
 Open a web browser and naviage to `http://localhost:8080` 
+
+# Server Configuration
+
+To add media follow these steps.
+
+1. Make two directories in the root of the project
+   
+  `mkdir ./db_data`
+  `mkdir ./media_data`
+  
+2. Add media to the media_data directory
+3. Add your media via the ui from the server client and make sure the file path matches 
