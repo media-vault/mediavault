@@ -1,10 +1,10 @@
-<h1 align="center">MediaVault</h1>
-<h3 align="center">A Libre Software Media System</h3>
+<h1 align="center">LibreUno</h1>
+<h3 align="center">A Unified Software Media System</h3>
 
 ---
 
 <p align="center">
-<img alt="Logo Banner" src="https://raw.githubusercontent.com/media-vault/mediavault-ux/main/MediaVault - Banner Text Solid.png?sanitize=true"/>
+<img alt="Logo Banner" src="https://raw.githubusercontent.com/media-vault/mediavault-ux/main/libreuno_banner.png?sanitize=true"/>
 </p>
 
 ---
@@ -27,15 +27,15 @@ Check out our <a href="">feature request hub</a>.<br/>
 
 1. Clone the repository:
 
-`git clone https://github.com/media-vault/mediavault.git`
+`git clone https://github.com/libreuno/libreuno.git`
 
-`cd mediavault`
+`cd libreuno`
 
 2. To build the project with maven and run it in docker we use the build script
 
 `./build.sh`
 
-3. Access the MediaVault web interface
+3. Access the LibreUno web interface
 
 Open a web browser and naviage to `http://localhost:8080` 
 
