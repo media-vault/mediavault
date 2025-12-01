@@ -1,10 +1,10 @@
-<h1 align="center">LibreUno</h1>
+<h1 align="center">Libretekka</h1>
 <h3 align="center">A Unified Software Media System</h3>
 
 ---
 
 <p align="center">
-<img alt="Logo Banner" src="https://raw.githubusercontent.com/media-vault/mediavault-ux/main/libreuno_banner.png?sanitize=true"/>
+<img alt="Logo Banner" src="https://raw.githubusercontent.com/libretekka/libretekka-ux/main/libretekka_banner.jpeg?sanitize=true"/>
 </p>
 
 ---
@@ -27,9 +27,9 @@ Check out our <a href="">feature request hub</a>.<br/>
 
 1. Clone the repository:
 
-`git clone https://github.com/libreuno/libreuno.git`
+`git clone https://github.com/libretekka/libretekka.git`
 
-`cd libreuno`
+`cd libretekka`
 
 2. To build the project with maven and run it in docker we use the build script
 
