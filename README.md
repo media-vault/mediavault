@@ -19,8 +19,8 @@ Check out our <a href="">contributing guide</a> to see where you can help and ou
 Check out our <a href="">feature request hub</a>.<br/>
 
 # Prerequisites
-- Java Development Kit (JDK) 17 or higher
-- Maven 3.6 or higher
+- 
+- 
 - Docker and Docker Compose
 
 # Installation
@@ -31,22 +31,3 @@ Check out our <a href="">feature request hub</a>.<br/>
 
 `cd libretekka`
 
-2. To build the project with maven and run it in docker we use the build script
-
-`./build.sh`
-
-3. Access the LibreUno web interface
-
-Open a web browser and naviage to `http://localhost:8080` 
-
-# Server Configuration
-
-To add media follow these steps.
-
-1. Make two directories in the root of the project
-   
-  `mkdir ./db_data`
-  `mkdir ./media_data`
-  
-2. Add media to the media_data directory
-3. Add your media via the ui from the server client and make sure the file path matches 

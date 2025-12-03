@@ -16,10 +16,6 @@ src/main/resources/application.properties
 # Compiled class files
 *.class
 
-# App database and media directories
-db_data/
-media_data/
-
 # Package files
 *.jar
 *.war
